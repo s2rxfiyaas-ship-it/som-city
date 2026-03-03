@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="so">
+<head>
+    <meta charset="UTF-8">
+    <title>Som City - Kekey H.Cabdi</title>
+    <style>
+        body {
+            background-color: #050505;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Logo/Sawirka aad soo dirtay */
+        .main-logo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #00d4ff;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.6);
+            margin-top: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Bil Ramadaan */
+        .moon-container {
+            position: absolute;
+            top: 30px;
+            right: 60px;
+            text-align: center;
+            animation: rotateMoon 15s linear infinite;
+        }
+        @keyframes rotateMoon {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .moon { font-size: 80px; filter: drop-shadow(0 0 20px gold); }
+        .ramadan-text { color: gold; font-weight: bold; margin-top: 5px; }
+
+        /* Magacyada */
+        .test-badge {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid red;
+            color: #ff4d4d;
+            padding: 5px 20px;
+            border-radius: 50px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        h2 { color: #ff007b; letter-spacing: 5px; margin: 0; font-size: 1.2rem; }
+        h1 { font-size: 70px; margin: 5px 0; text-shadow: 0 0 25px #00d4ff; font-weight: 900; color: #fff; }
+
+        /* Tirada */
+        #timer {
+            font-size: 120px;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            margin: -10px 0;
+        }
+
+        .back-text {
+            font-size: 40px;
+            color: #ffd700;
+            font-weight: bold;
+            letter-spacing: 10px;
+            animation: pulse 1.2s infinite alternate;
+        }
+        @keyframes pulse {
+            from { opacity: 0.5; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1.05); }
+        }
+
+        /* Dooliga iyo Bisadda */
+        .chase-container {
+            position: absolute;
+            bottom: 30px;
+            width: 100%;
+            white-space: nowrap;
+        }
+        .characters {
+            display: inline-block;
+            font-size: 50px;
+            position: relative;
+            animation: chase 7s linear infinite;
+        }
+        @keyframes chase {
+            from { left: -100px; }
+            to { left: 100%; }
+        }
+
+        /* Welcome Message */
+        #welcome {
+            display: none;
+            font-size: 70px;
+            text-align: center;
+            animation: finalGlow 0.6s infinite alternate;
+        }
+        @keyframes finalGlow {
+            from { text-shadow: 0 0 20px #fff, 0 0 40px #00d4ff; }
+            to { text-shadow: 0 0 50px #fff, 0 0 90px #ff007b; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="moon-container">
+        <div class="moon">🌙</div>
+        <div class="ramadan-text">RAMADAAN KAREEM</div>
+    </div>
+
+    <div id="main-content" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+        <div class="test-badge">TIJAABO / TEST MODE</div>
+        <h2>KEKEY H.CABDI PRESENTS</h2>
+        <h1>SOM CITY</h1>
+        
+        <img src="https://cdn.discordapp.com/attachments/1437856524037914665/1478488106620555384/file_0000000092046243b62261da1377cf12.png?ex=69a894d9&is=69a74359&hm=eb2c6b637958d23fff77d1e6a0182877d12413606d87ab94dc004cd04693c345" class="main-logo" alt="SomCity Logo">
+
+        <div id="timer">10:00</div>
+        
+        <div class="back-text">I AM BACK</div>
+    </div>
+
+    <div id="welcome">
+        🌟 WELCOME TO SOM CITY 🌟<br>
+        <span style="font-size: 30px; color: gold;">PROUDLY MADE BY H.CABDI</span>
+    </div>
+
+    <div class="chase-container">
+        <div class="characters">
+            🐈 💨 &nbsp; 🐁
+        </div>
+    </div>
+
+    <script>
+        let secondsLeft = 10 * 60; 
+
+        function startCountdown() {
+            const timerDisplay = document.getElementById('timer');
+            const mainContent = document.getElementById('main-content');
+            const welcomeMsg = document.getElementById('welcome');
+
+            const timerInterval = setInterval(() => {
+                let mins = Math.floor(secondsLeft / 60);
+                let secs = secondsLeft % 60;
+
+                let displayMins = mins < 10 ? "0" + mins : mins;
+                let displaySecs = secs < 10 ? "0" + secs : secs;
+
+                timerDisplay.innerText = displayMins + ":" + displaySecs;
+
+                if (secondsLeft <= 0) {
+                    clearInterval(timerInterval);
+                    mainContent.style.display = 'none';
+                    welcomeMsg.style.display = 'block';
+                    document.body.style.background = "#000";
+                }
+
+                secondsLeft--;
+            }, 1000);
+        }
+
+        window.onload = startCountdown;
+    </script>
+
+</body>
+</html>
